@@ -81,6 +81,20 @@ var sumBelow = function(n) {
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
 var range = function(x, y) {
+  if (y - x === 0
+  || Math.abs(x) - Math.abs(y) === 1
+  || Math.abs(y) - Math.abs(x) === 1 ) {
+    return []
+  }
+
+  if (y - x === 2) {
+    return [x + 1];
+  } else {
+    var list = range(x, y -1);
+
+    list.push(y -1);
+    return list;
+  }
 };
 
 // 7. Compute the exponent of a number.
@@ -89,6 +103,17 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0 || base === 1) {
+    return 1;
+  }
+
+  if (exp > 0) {
+    return base *= exponent(base, exp - 1)
+  }
+
+  if (exp < 0) {
+    return exponent(base, exp + 1)/base;
+  }
 };
 
 // 8. Determine if a number is a power of two.
@@ -206,6 +231,14 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  if (n < 0) {
+    return null;
+  }
+  if (n === 2) {
+    return 1;
+  }
+
+  return nthFibo(n -1) + nthFibo(n -2);
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
